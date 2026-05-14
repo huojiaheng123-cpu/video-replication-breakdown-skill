@@ -1,0 +1,7 @@
+interface:
+  display_name: "视频复刻拆解"
+  short_description: "拆解视频创作结构并生成HTML复刻蓝图与脚本提示词"
+  default_prompt: "使用 $video-replication-breakdown 拆解这个视频，提取证据、分镜、节奏、风格、字幕和声音结构，生成 HTML 案例拆解页、复刻脚本和可复用提示词。"
+
+policy:
+  allow_implicit_invocation: true

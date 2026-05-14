@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}} - 视频复刻拆解</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #fbfaf4;
+      --panel: #fffdf6;
+      --ink: #201813;
+      --muted: #6f6258;
+      --line: #d8c6ae;
+      --accent: #7b351c;
+      --accent-2: #215f45;
+      --soft: #f3e4c7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.65;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 18px 72px; }
+    header {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 32px;
+      background: linear-gradient(135deg, #fff7df, #d99a48);
+    }
+    h1 { margin: 12px 0 16px; font-size: clamp(34px, 5vw, 64px); line-height: 1.1; }
+    h2 { margin: 0 0 18px; font-size: 28px; }
+    h3 { margin: 0 0 10px; font-size: 20px; }
+    section {
+      margin-top: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      background: var(--panel);
+    }
+    .eyebrow {
+      display: inline-flex;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #fff9ed;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .metrics, .grid { display: grid; gap: 14px; }
+    .metrics { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top: 24px; }
+    .metric, .card {
+      border: 1px solid #eadbc6;
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(255,255,255,.76);
+    }
+    .metric strong { display: block; font-size: 28px; color: var(--accent); }
+    .tabs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      margin-top: 18px;
+      padding-bottom: 6px;
+    }
+    .tab {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: #24140d;
+      color: #fff;
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; }
+    th, td { border: 1px solid #eadbc6; padding: 12px; vertical-align: top; text-align: left; }
+    th { background: #f7eddd; color: var(--accent); }
+    .shot {
+      display: grid;
+      grid-template-columns: minmax(220px, 38%) 1fr;
+      gap: 18px;
+      align-items: start;
+      margin-top: 16px;
+    }
+    .shot img, video {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #111;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      border: 1px solid #dce4df;
+      border-radius: 8px;
+      padding: 16px;
+      background: #f7faf8;
+    }
+    .path { font-family: Consolas, monospace; color: var(--accent-2); }
+    @media (max-width: 720px) {
+      header, section { padding: 18px; }
+      .shot { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="eyebrow">视频复刻拆解 · HTML 案例资产</span>
+      <h1>{{TITLE}}</h1>
+      <p>{{ONE_LINE_VALUE}}</p>
+      <div class="metrics">
+        <div class="metric"><strong>{{DURATION}}</strong><span>原片时长/图文帧数</span></div>
+        <div class="metric"><strong>{{SHOT_COUNT}}</strong><span>有效分镜</span></div>
+        <div class="metric"><strong>{{EVIDENCE_STATE}}</strong><span>读取状态</span></div>
+        <div class="metric"><strong>HTML+MD</strong><span>并列案例资产</span></div>
+      </div>
+      <div class="tabs">
+        <span class="tab">证据</span>
+        <span class="tab">结构</span>
+        <span class="tab">分镜</span>
+        <span class="tab">风格</span>
+        <span class="tab">ASR/字幕</span>
+        <span class="tab">复刻脚本</span>
+        <span class="tab">提示词</span>
+        <span class="tab">资产路径</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>原视频 / 图文证据</h2>
+      <div class="grid">{{EVIDENCE_BLOCKS}}</div>
+    </section>
+
+    <section>
+      <h2>结构拆解</h2>
+      <p>{{STRUCTURE_SUMMARY}}</p>
+      {{STRUCTURE_TABLE}}
+    </section>
+
+    <section>
+      <h2>分镜时间线</h2>
+      {{SHOT_TIMELINE}}
+    </section>
+
+    <section>
+      <h2>风格层</h2>
+      {{STYLE_ANALYSIS}}
+    </section>
+
+    <section>
+      <h2>ASR / 字幕复核</h2>
+      {{ASR_REVIEW}}
+    </section>
+
+    <section>
+      <h2>复刻脚本</h2>
+      <pre>{{REPLICATION_SCRIPT}}</pre>
+    </section>
+
+    <section>
+      <h2>AI 生成提示词</h2>
+      <pre>{{PROMPTS}}</pre>
+    </section>
+
+    <section>
+      <h2>本地资产路径</h2>
+      <div class="grid">{{ASSET_PATHS}}</div>
+    </section>
+  </main>
+</body>
+</html>
