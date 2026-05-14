@@ -1,0 +1,10 @@
+{
+  "name": "video-replication-breakdown-skill",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Local setup helpers for the Codex video replication breakdown skill",
+  "scripts": {
+    "check": "python scripts/check_capabilities.py"
+  },
+  "dependencies": {}
+}
